@@ -1,0 +1,11 @@
+{
+  "name": "cicd-js-demo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest",
+    "build": "mkdir -p dist && echo 'Build passed' > dist/index.html"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
