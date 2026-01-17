@@ -1,16 +1,15 @@
 name: CI-CD
 on: [push]
+
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - name: Install dependencies
       run: npx yarn
-    - name: Simulate build step
-      run: |
-        mkdir dist
-        echo "Hello from CI/CD!" > dist/index.html
+    - name: Build
+      run: npx yarn build
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
