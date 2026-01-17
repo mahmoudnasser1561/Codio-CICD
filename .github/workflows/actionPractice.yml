@@ -1,18 +1,31 @@
 name: CI-CD
+
 on: [push]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: npx yarn
-    - name: Build
-      run: npx yarn build
-    - name: Upload artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: assets
-        path: dist
 
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        run: yarn test
+
+      - name: Build app
+        run: yarn build
+
+      - name: Upload artifact
+        if: github.server_url == 'https://github.com'
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets
+          path: dist
